@@ -18,4 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/products', \App\Http\Controllers\Api\V1\ProductController::class);
+// One Request per minute
+Route::group(['middleware' => 'throttle:1,1'], function (){
+    Route::apiResource('/products', \App\Http\Controllers\Api\V1\ProductController::class);
+});
