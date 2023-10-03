@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V2;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index() : JsonResource
     {
-        $products = Product::where('id','<',3)->with('category')->get();
+        $products = Product::with('category')->get();
         return ProductResource::collection($products);
     }
 
